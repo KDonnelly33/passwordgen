@@ -5,8 +5,8 @@ function generatePassword() {
   // asks for password length; checks to see if its between 8 - 128
   var passlength = prompt("Enter the length of the password (between 8 and 128):");
   if (isNaN(passlength) || passlength < 8 || passlength > 128) {
-    var passlength = alert("Invalid password length. Please enter a number between 8 and 128.");
-    return;
+    alert("Invalid password length. Please enter a number between 8 and 128.");
+    return "Unable to render, try again.";
   }
   // ask and sets var for use of capital letters  
   var passcap = confirm("Do you want to use CAPITAL letters?");
@@ -16,15 +16,17 @@ function generatePassword() {
   var passspec = confirm("Would you like to use special characters?");
   // ask and sets var for use of numbers
   var passnumber = confirm("Would you like to include numbers?")
-  // next 4 lines defines strings for later use 
-  if (!passcap && !passlow && !passspec) {
+  // checks to make sure at least one option is selected
+  if (!passcap && !passlow && !passspec && !passnumber) {
     alert("Please select at least one option");
+    return "Unable to render, try again.";
   }
+  // next 4 lines defines strings for later use 
   var lowcaseletters = "abcdefghijklmnopqrstuvwxyz";
   var upcaseletters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "0123456789"
   var specchar = "!@#$%^&*()_-+=;:?/><{}[]"
-  // sets characters as var and adds in applicable strings
+  // sets characters as var and adds strings to characters
   var characters = "";
   if (passcap) {
     characters += upcaseletters;
@@ -60,4 +62,3 @@ function writePassword() {
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
